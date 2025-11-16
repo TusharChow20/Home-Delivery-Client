@@ -13,5 +13,9 @@ body {
   name: "light";
   default: true;
   --color-primary: #acc857;
-  --color-secondary: $03373D;
+  --color-secondary: #03373d;
+}
+.thumbs,
+.carousel-status {
+  display: none;
 }
