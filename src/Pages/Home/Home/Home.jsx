@@ -4,6 +4,9 @@ import HowItWorks from "./HowItWorks";
 import OurService from "./OurService";
 import Brands from "../Brands/Brands";
 import Parcel from "../Percel/Parcel";
+import Reviews from "./Reviews";
+
+const reviewData = fetch('/reviews.json')
 
 const Home = () => {
   return (
@@ -14,6 +17,7 @@ const Home = () => {
       <OurService> </OurService>
       <Brands></Brands>
       <Parcel></Parcel>
+      <Reviews></Reviews>
     </div>
   );
 };
