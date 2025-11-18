@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../../../Components/Logo";
+import { NavLink } from "react-router";
 
 const NavBar = () => {
   const allLinks = (
@@ -8,12 +9,12 @@ const NavBar = () => {
         <a>Item 1</a>
       </li>
       <li>
-        <a>Item 3</a>
+        <NavLink to={"/coverage"}>Coverage</NavLink>
       </li>
     </>
   );
   return (
-    <div>
+    <div className="">
       <div className="navbar bg-base-100 shadow-sm rounded-2xl  ">
         <div className="navbar-start">
           <div className="dropdown">
