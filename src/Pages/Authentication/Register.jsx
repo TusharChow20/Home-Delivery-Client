@@ -7,46 +7,68 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const handleRegister = (data) => {
     console.log(data);
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(handleRegister)}>
-        <fieldset class="fieldset border border-base-300 p-4 rounded-box w-full max-w-sm">
-          <label class="fieldset-legend">Name</label>
+        <fieldset className="fieldset border border-base-300 p-4 rounded-box w-full max-w-sm">
+          {/* Name */}
+          <label className="fieldset-legend">Name</label>
           <input
             type="text"
+            {...register("name", { required: "Name is required" })}
             placeholder="Name"
-            class="input input-bordered w-full"
+            className="input input-bordered w-full"
           />
+          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
 
-          <label class="fieldset-legend mt-3">Email</label>
+          {/* Email */}
+          <label className="fieldset-legend mt-3">Email</label>
           <input
-            {...register("email", {
-              required: true,
-            })}
             type="email"
-            placeholder="Email"
-            class="input input-bordered w-full"
-          />
-          {errors.email?.type === "required" && (
-            <p role="alert" className="text-red-500">
-              {errors.mail.message}
-            </p>
-          )}
-          <label class="fieldset-legend mt-3">Password</label>
-          <input
-            {...register("password", {
-              required: true,
-              minLength: 6,
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid email address",
+              },
             })}
-            type="password"
-            placeholder="Password"
-            class="input input-bordered w-full"
+            placeholder="Email"
+            className="input input-bordered w-full"
           />
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
 
-          <button class="btn mt-4 w-full bg-lime-300 hover:bg-lime-400">
+          {/* Password */}
+          <label className="fieldset-legend mt-3">Password</label>
+          <input
+            type="password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+              pattern: {
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+                message:
+                  "Password must include uppercase, lowercase, number, and special character",
+              },
+            })}
+            placeholder="Password"
+            className="input input-bordered w-full"
+          />
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
+
+          <button className="btn mt-4 w-full bg-lime-300 hover:bg-lime-400">
             Register
           </button>
         </fieldset>
