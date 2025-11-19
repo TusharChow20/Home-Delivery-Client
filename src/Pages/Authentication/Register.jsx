@@ -15,9 +15,9 @@ const Register = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(handleRegister)}>
-        <fieldset className="fieldset border border-base-300 p-4 rounded-box w-full max-w-sm">
+        <fieldset className=" border border-base-300 p-4 rounded-box w-full md:max-w-sm">
           {/* Name */}
-          <label className="fieldset-legend">Name</label>
+          <label className="fieldset-legend ">Name</label>
           <input
             type="text"
             {...register("name", { required: "Name is required" })}

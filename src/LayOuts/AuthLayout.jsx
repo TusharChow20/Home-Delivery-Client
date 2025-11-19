@@ -8,7 +8,7 @@ const AuthLayout = () => {
       <div className="">
         <Logo></Logo>
       </div>
-      <div className="md:flex justify-center items-center gap-5 min-h-screen">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-5 min-h-screen">
         <div className="flex-1">
           <Outlet></Outlet>
         </div>
