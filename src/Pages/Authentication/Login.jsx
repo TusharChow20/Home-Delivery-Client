@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
+import { Link } from "react-router";
 
 const Login = () => {
   const { logInUser } = useAuth();
@@ -78,9 +79,9 @@ const Login = () => {
 
           <p className="text-center text-sm mt-4">
             Don't have any account?{" "}
-            <a href="#" className="link link-success font-medium">
+            <Link to={"/register"} className="link link-success font-medium">
               Register
-            </a>
+            </Link>
           </p>
 
           <div className="divider text-sm text-base-content/60">Or</div>

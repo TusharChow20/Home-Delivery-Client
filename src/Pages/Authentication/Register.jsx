@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
+import { Link } from "react-router";
 
 const Register = () => {
   const { registerUser } = useAuth();
@@ -16,9 +17,9 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-screen  flex flex-col items-center justify-center p-4">
       <form onSubmit={handleSubmit(handleRegister)}>
-        <fieldset className=" border border-base-300 p-4 rounded-box w-full md:max-w-sm">
+        <fieldset className="  p-4 rounded-box w-full md:max-w-sm">
           {/* Name */}
           <label className="fieldset-legend ">Name</label>
           <input
@@ -76,6 +77,12 @@ const Register = () => {
           </button>
         </fieldset>
       </form>
+      <p className="text-center text-sm mt-4">
+        Already have any account?{" "}
+        <Link to={"/login"} className="link link-success font-medium">
+          Log In
+        </Link>
+      </p>
     </div>
   );
 };
