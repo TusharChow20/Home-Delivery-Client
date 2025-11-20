@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { Link } from "react-router";
+import Social from "./Social";
 
 const Register = () => {
   const { registerUser } = useAuth();
@@ -17,21 +18,28 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen  flex flex-col items-center justify-center p-4">
-      <form onSubmit={handleSubmit(handleRegister)}>
-        <fieldset className="  p-4 rounded-box w-full md:max-w-sm">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      {/* Title */}
+      <h1 className="text-3xl font-bold">Create an Account</h1>
+      <p className="text-gray-500 mb-6">Register with ZapShift</p>
+
+      <form onSubmit={handleSubmit(handleRegister)} className="w-full max-w-sm">
+        <fieldset className="p-4 rounded-box w-full space-y-3">
           {/* Name */}
-          <label className="fieldset-legend ">Name</label>
+          <label className="fieldset-legend">Name</label>
           <input
             type="text"
             {...register("name", { required: "Name is required" })}
             placeholder="Name"
             className="input input-bordered w-full"
           />
-          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
 
           {/* Email */}
-          <label className="fieldset-legend mt-3">Email</label>
+          <label className="fieldset-legend">Email</label>
           <input
             type="email"
             {...register("email", {
@@ -44,12 +52,13 @@ const Register = () => {
             placeholder="Email"
             className="input input-bordered w-full"
           />
+
           {errors.email && (
-            <p className="text-red-500">{errors.email.message}</p>
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
 
           {/* Password */}
-          <label className="fieldset-legend mt-3">Password</label>
+          <label className="fieldset-legend">Password</label>
           <input
             type="password"
             {...register("password", {
@@ -68,21 +77,24 @@ const Register = () => {
             placeholder="Password"
             className="input input-bordered w-full"
           />
+
           {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
 
-          <button className="btn mt-4 w-full bg-lime-300 hover:bg-lime-400">
+          {/* Register Button */}
+          <button className="btn mt-2 w-full bg-primary hover:bg-lime-400">
             Register
           </button>
         </fieldset>
       </form>
       <p className="text-center text-sm mt-4">
-        Already have any account?{" "}
-        <Link to={"/login"} className="link link-success font-medium">
-          Log In
+        Already have an account?{" "}
+        <Link to="/login" className="link link-success font-medium">
+          Login
         </Link>
       </p>
+      <Social></Social>
     </div>
   );
 };
