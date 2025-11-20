@@ -5,6 +5,8 @@ import Coverage from "../Pages/Coverage/Coverage";
 import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
 import AuthLayout from "../LayOuts/AuthLayout";
+import RiderRegister from "../Pages/BeARider/RiderRegister";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
         path: "/coverage",
         Component: Coverage,
         loader: () => fetch("/stores.json").then((res) => res.json()),
+      },
+      {
+        path: "/riderRegistration",
+        element: (
+          <PrivateRoute>
+            <RiderRegister></RiderRegister>
+          </PrivateRoute>
+        ),
       },
     ],
   },

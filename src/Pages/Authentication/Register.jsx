@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { Link } from "react-router";
 import Social from "./Social";
+import axios from "axios";
 
 const Register = () => {
-  const { registerUser } = useAuth();
+  const { registerUser, updateUser } = useAuth();
 
   const {
     register,
@@ -14,7 +15,26 @@ const Register = () => {
   } = useForm();
 
   const handleRegister = (data) => {
-    registerUser(data.email, data.password);
+    // console.log(data.photo[0]);
+    const imageFile = data.photo[0];
+    registerUser(data.email, data.password).then(() => {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      axios
+        .post(
+          `https://api.imgbb.com/1/upload?key=${
+            import.meta.env.VITE_image_hosting
+          }`,
+          formData
+        )
+        .then((res) => {
+          const userProfile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+          updateUser(userProfile);
+        });
+    });
   };
 
   return (
@@ -33,7 +53,6 @@ const Register = () => {
             placeholder="Name"
             className="input input-bordered w-full"
           />
-
           {errors.name && (
             <p className="text-red-500 text-sm">{errors.name.message}</p>
           )}
@@ -52,7 +71,6 @@ const Register = () => {
             placeholder="Email"
             className="input input-bordered w-full"
           />
-
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
@@ -77,10 +95,24 @@ const Register = () => {
             placeholder="Password"
             className="input input-bordered w-full"
           />
-
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
+
+          {/* --------------------------- */}
+          {/* ⭐ ADDED: Photo Upload Input */}
+          {/* --------------------------- */}
+          <label className="fieldset-legend">Profile Photo</label>
+          <input
+            type="file"
+            accept="image/*"
+            {...register("photo", { required: true })}
+            className="file-input file-input-bordered w-full"
+          />
+          {errors.photo && (
+            <p className="text-red-500 text-sm">Photo is required</p>
+          )}
+          {/* --------------------------- */}
 
           {/* Register Button */}
           <button className="btn mt-2 w-full bg-primary hover:bg-lime-400">
@@ -88,12 +120,14 @@ const Register = () => {
           </button>
         </fieldset>
       </form>
+
       <p className="text-center text-sm mt-4">
         Already have an account?{" "}
         <Link to="/login" className="link link-success font-medium">
           Login
         </Link>
       </p>
+
       <Social></Social>
     </div>
   );
