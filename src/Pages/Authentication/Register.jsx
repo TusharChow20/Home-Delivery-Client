@@ -1,11 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Social from "./Social";
 import axios from "axios";
 
 const Register = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   const { registerUser, updateUser } = useAuth();
 
   const {
@@ -16,6 +20,7 @@ const Register = () => {
 
   const handleRegister = (data) => {
     // console.log(data.photo[0]);
+
     const imageFile = data.photo[0];
     registerUser(data.email, data.password).then(() => {
       const formData = new FormData();
@@ -32,7 +37,9 @@ const Register = () => {
             displayName: data.name,
             photoURL: res.data.data.url,
           };
-          updateUser(userProfile);
+          updateUser(userProfile).then(() => {
+            navigate(from, { replace: true });
+          });
         });
     });
   };
@@ -123,7 +130,11 @@ const Register = () => {
 
       <p className="text-center text-sm mt-4">
         Already have an account?{" "}
-        <Link to="/login" className="link link-success font-medium">
+        <Link
+          to="/login"
+          state={location?.state}
+          className="link link-success font-medium"
+        >
           Login
         </Link>
       </p>

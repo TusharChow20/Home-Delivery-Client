@@ -1,10 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Social from "./Social";
 
 const Login = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   const { logInUser } = useAuth();
   const {
     register,
@@ -12,7 +16,9 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const handleSignIn = (data) => {
-    logInUser(data.email, data.password);
+    logInUser(data.email, data.password).then(() => {
+      navigate(from, { replace: true });
+    });
   };
   return (
     <div className="min-h-screen  flex items-center justify-center p-4">
@@ -80,7 +86,11 @@ const Login = () => {
 
           <p className="text-center text-sm mt-4">
             Don't have any account?{" "}
-            <Link to={"/register"} className="link link-success font-medium">
+            <Link
+              to={"/register"}
+              state={location?.state}
+              className="link link-success font-medium"
+            >
               Register
             </Link>
           </p>
