@@ -38,6 +38,7 @@ const router = createBrowserRouter([
             <ParcelSend></ParcelSend>
           </PrivateRoute>
         ),
+        loader: () => fetch("/stores.json").then((res) => res.json()),
       },
     ],
   },
