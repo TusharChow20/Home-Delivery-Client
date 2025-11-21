@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const ParcelSend = () => {
   const serviceCenter = useLoaderData();
@@ -45,11 +46,28 @@ const ParcelSend = () => {
         deliveryCost = fixedCost + extraWeightCost;
       }
     }
-    console.log(deliveryCost);
+    // console.log(deliveryCost);
 
-    console.log(sameDistrict);
+    // console.log(sameDistrict);
 
-    alert("Proceeding to confirm booking...");
+    // alert("Proceeding to confirm booking...");
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Total Cost ${deliveryCost}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Confirmed",
+          text: "Your Parcel is confirmed",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
