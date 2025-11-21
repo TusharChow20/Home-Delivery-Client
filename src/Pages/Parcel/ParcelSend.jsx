@@ -26,6 +26,29 @@ const ParcelSend = () => {
 
   const handleParcel = (data) => {
     console.log("Form data:", data);
+    const sameDistrict = data.senderDistrict === data.receiverDistrict;
+    const isDocument = data.documentType === "document";
+    let deliveryCost = 0;
+    const parcelWeight = parseFloat(data.parcelWeight);
+    if (isDocument) {
+      deliveryCost = sameDistrict ? 60 : 80;
+    } else {
+      if (parcelWeight < 4) {
+        deliveryCost = sameDistrict ? 110 : 150;
+      } else {
+        const fixedCost = sameDistrict ? 110 : 150;
+        const extraWeight = parcelWeight - 4;
+        const extraWeightCost = sameDistrict
+          ? extraWeight * 40
+          : extraWeight * 40 + 40;
+
+        deliveryCost = fixedCost + extraWeightCost;
+      }
+    }
+    console.log(deliveryCost);
+
+    console.log(sameDistrict);
+
     alert("Proceeding to confirm booking...");
   };
 
@@ -90,7 +113,7 @@ const ParcelSend = () => {
                 Parcel Weight (KG)
               </label>
               <input
-                type="text"
+                type="number"
                 {...register("parcelWeight")}
                 // value={formData.parcelWeight}
                 // onChange={handleChange}
