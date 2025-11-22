@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
@@ -52,6 +52,8 @@ const ParcelSend = () => {
         deliveryCost = fixedCost + extraWeightCost;
       }
     }
+    data.deliveryCost = deliveryCost;
+    
     // console.log(deliveryCost);
 
     // console.log(sameDistrict);
