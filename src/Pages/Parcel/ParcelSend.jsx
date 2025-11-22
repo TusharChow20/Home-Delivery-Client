@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecurity from "../../Hooks/useAxiosSecurity";
+import useAuth from "../../Hooks/useAuth";
 
 const ParcelSend = () => {
+  const { user } = useAuth();
+  // console.log(user.email);
+
+  const axiosSecure = useAxiosSecurity();
   const serviceCenter = useLoaderData();
   const allRegions = serviceCenter.map((regions) => regions.region);
   const nonRepeatedRegion = [...new Set(allRegions)];
@@ -66,6 +72,7 @@ const ParcelSend = () => {
           text: "Your Parcel is confirmed",
           icon: "success",
         });
+        axiosSecure.post("/parcels", data);
       }
     });
   };
@@ -157,26 +164,23 @@ const ParcelSend = () => {
                   <input
                     type="text"
                     {...register("senderName")}
-                    // value={formData.senderName}
-                    // onChange={handleChange}
                     placeholder="Sender Name"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   />
                 </div>
+
                 <div>
                   <label className="block text-sm font-medium text-gray-900 mb-2">
-                    Sender Pickup Wire house
+                    Sender Email
                   </label>
-                  <select
-                    name="senderWirehouse"
-                    // value={formData.senderWirehouse}
-                    // onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white"
-                  >
-                    <option value="">Select Wire house</option>
-                    <option value="warehouse1">Warehouse 1</option>
-                    <option value="warehouse2">Warehouse 2</option>
-                  </select>
+                  <input
+                    type="email"
+                    value={user.email}
+                    {...register("senderEmail")}
+                    placeholder="Sender Email"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent cursor-not-allowed"
+                    readOnly
+                  />
                 </div>
               </div>
 
@@ -271,27 +275,22 @@ const ParcelSend = () => {
                   </label>
                   <input
                     type="text"
-                    name="receiverName"
-                    // value={formData.receiverName}
-                    // onChange={handleChange}
+                    {...register("receiverName")}
                     placeholder="Receiver Name"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   />
                 </div>
+
                 <div>
                   <label className="block text-sm font-medium text-gray-900 mb-2">
-                    Receiver Delivery Wire house
+                    Receiver Email
                   </label>
-                  <select
-                    name="receiverWirehouse"
-                    // value={formData.receiverWirehouse}
-                    // onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white"
-                  >
-                    <option value="">Select Wire house</option>
-                    <option value="warehouse1">Warehouse 1</option>
-                    <option value="warehouse2">Warehouse 2</option>
-                  </select>
+                  <input
+                    type="email"
+                    {...register("receiverEmail")}
+                    placeholder="Receiver Email"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  />
                 </div>
               </div>
 
