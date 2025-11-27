@@ -72,7 +72,28 @@ const DashboardLayout = () => {
 
               {/* dashboard links */}
               <li>
-                <NavLink to={"/dashboard/myParcels"}>My Parcels</NavLink>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Dashboard"
+                  to={"/dashboard/myParcels"}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-4"
+                  >
+                    <path d="M12 3L3 7v10l9 4 9-4V7l-9-4z"></path>
+                    <path d="M12 12l9-5"></path>
+                    <path d="M12 12v9"></path>
+                    <path d="M3 7l9 5"></path>
+                  </svg>
+                  <span className="is-drawer-close:hidden">My Parcels</span>
+                </NavLink>
               </li>
 
               {/* List item */}
