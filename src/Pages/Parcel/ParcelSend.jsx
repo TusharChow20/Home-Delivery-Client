@@ -30,7 +30,7 @@ const ParcelSend = () => {
     return districtName;
   };
   // console.log(nonRepeatedRegion);
-
+  
   const handleParcel = (data) => {
     console.log("Form data:", data);
     const sameDistrict = data.senderDistrict === data.receiverDistrict;
