@@ -158,9 +158,13 @@ const MyParcels = () => {
                         <div className="flex items-center gap-2">
                           <Link
                             to={`/dashboard/payment/${delivery._id}`}
-                            className="px-4 py-2 bg-lime-400 hover:bg-lime-500 text-gray-900 rounded-md text-sm font-medium transition-colors"
+                            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                              delivery.paymentStatus === "paid"
+                                ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
+                                : "bg-lime-400 hover:bg-lime-500 text-gray-900"
+                            }`}
                           >
-                            Pay
+                            {delivery.paymentStatus === "paid" ? "Paid" : "Pay"}
                           </Link>
                           <button className="p-2 hover:bg-gray-100 rounded-md transition-colors">
                             <BsEye className="w-4 h-4 text-gray-600" />
@@ -220,9 +224,16 @@ const MyParcels = () => {
                   </span>
 
                   <div className="flex items-center gap-2">
-                    <button className="px-4 py-2 bg-lime-400 hover:bg-lime-500 text-gray-900 rounded-md text-sm font-medium transition-colors">
-                      Pay
-                    </button>
+                    <Link
+                      to={`/dashboard/payment/${delivery._id}`}
+                      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                        delivery.paymentStatus === "paid"
+                          ? "bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none"
+                          : "bg-lime-400 hover:bg-lime-500 text-gray-900"
+                      }`}
+                    >
+                      {delivery.paymentStatus === "paid" ? "Paid" : "Pay"}
+                    </Link>
                     <button className="p-2 hover:bg-gray-100 rounded-md transition-colors">
                       <BsEye className="w-4 h-4 text-gray-600" />
                     </button>

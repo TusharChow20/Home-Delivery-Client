@@ -30,7 +30,7 @@ const ParcelSend = () => {
     return districtName;
   };
   // console.log(nonRepeatedRegion);
-  
+
   const handleParcel = (data) => {
     console.log("Form data:", data);
     const sameDistrict = data.senderDistrict === data.receiverDistrict;
@@ -53,12 +53,8 @@ const ParcelSend = () => {
       }
     }
     data.deliveryCost = deliveryCost;
-    
-    // console.log(deliveryCost);
+    data.paymentStatus = "pending"; // Add this line to set initial payment status
 
-    // console.log(sameDistrict);
-
-    // alert("Proceeding to confirm booking...");
     Swal.fire({
       title: "Are you sure?",
       text: `Total Cost ${deliveryCost}`,
