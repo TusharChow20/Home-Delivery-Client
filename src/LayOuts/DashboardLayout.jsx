@@ -95,6 +95,32 @@ const DashboardLayout = () => {
                   <span className="is-drawer-close:hidden">My Parcels</span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Payment History"
+                  to={"/dashboard/paymentHistory"}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-4"
+                  >
+                    <path d="M3 3v5h5" />
+                    <path d="M3.05 13a9 9 0 1 0 .5-5.5" />
+                    <path d="M12 7v5l3 3" />
+                  </svg>
+
+                  <span className="is-drawer-close:hidden">
+                    Payment History
+                  </span>
+                </NavLink>
+              </li>
 
               {/* List item */}
               <li>
