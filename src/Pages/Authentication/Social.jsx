@@ -1,16 +1,27 @@
 import React from "react";
 import useAuth from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
+import useAxiosSecurity from "../../Hooks/useAxiosSecurity";
 
 const Social = () => {
-    const location = useLocation();
+  const axiosSecure = useAxiosSecurity();
+  const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
   const { googleSignIn } = useAuth();
   const handleGoogleSignIn = () => {
-    googleSignIn().then(() => {
-      navigate(from, { replace: true });
-    });;
+    googleSignIn().then((result) => {
+      const userInfo = {
+        email: result.user.email,
+        displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
+      };
+      axiosSecure.post("http://localhost:3000/users", userInfo).then((res) => {
+        console.log("user stored", res.data);
+
+        navigate(from, { replace: true });
+      });
+    });
   };
   return (
     <div className="text-center">
