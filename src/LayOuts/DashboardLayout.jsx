@@ -121,6 +121,29 @@ const DashboardLayout = () => {
                   </span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Approve Riders"
+                  to={"/dashboard/approveRiders"}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                    className="my-1.5 inline-block size-4"
+                  >
+                    <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+
+                  <span className="is-drawer-close:hidden">Approve Riders</span>
+                </NavLink>
+              </li>
 
               {/* List item */}
               <li>
