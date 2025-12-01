@@ -4,12 +4,13 @@ import useAuth from "../../Hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import Social from "./Social";
 import axios from "axios";
+import useAxiosSecurity from "../../Hooks/useAxiosSecurity";
 
 const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-
+  const axiosSecure = useAxiosSecurity();
   const { registerUser, updateUser } = useAuth();
 
   const {
@@ -33,6 +34,11 @@ const Register = () => {
           formData
         )
         .then((res) => {
+          const userInfo = {
+            email: data.email,
+            name: data.name,
+          };
+          axiosSecure.post("users", userInfo);
           const userProfile = {
             displayName: data.name,
             photoURL: res.data.data.url,
