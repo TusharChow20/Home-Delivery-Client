@@ -2,12 +2,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import riderImg from "../../assets/Images/agent-pending.png";
+import useAxiosSecurity from "../../Hooks/useAxiosSecurity";
+import Swal from "sweetalert2";
 
 const RiderRegister = () => {
   const serviceCenter = useLoaderData() || [];
   const allRegions = serviceCenter.map((regions) => regions.region);
   const nonRepeatedRegion = [...new Set(allRegions)];
-
+  const axiosSecure = useAxiosSecurity();
   const {
     register,
     handleSubmit,
@@ -26,19 +28,34 @@ const RiderRegister = () => {
   };
 
   const handleRiderSubmit = (data) => {
-    const riderData = {
-      name: data.name,
-      age: data.age,
-      email: data.email,
-      region: data.region,
-      district: data.district,
-      nid: data.nid,
-      contact: data.contact,
-      drivingLicence: data.drivingLicence,
-    };
-
-    console.log("Rider Registration Data:", riderData);
-    // Add your submission logic here
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to submit your rider registration?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, submit it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .post("/riders", data)
+          .then((response) => {
+            Swal.fire({
+              title: "Success!",
+              text: "Your rider registration has been submitted successfully",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong. Please try again.",
+              icon: "error",
+            });
+          });
+      }
+    });
   };
 
   return (
