@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosSecurity from "../../Hooks/useAxiosSecurity";
 import { ShieldCheck, ShieldX, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 
 const UserManage = () => {
+  const [searchPerson, setSearchPerson] = useState("");
   const axiosSecure = useAxiosSecurity();
 
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", searchPerson],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get(`/users?searchPerson=${searchPerson}`);
       return res.data;
     },
   });
@@ -57,6 +58,29 @@ const UserManage = () => {
       <h1 className="text-2xl font-bold mb-4">
         User Management ({users.length})
       </h1>
+      <label className="input">
+        <svg
+          className="h-[1em] opacity-50"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2.5"
+            fill="none"
+            stroke="currentColor"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </g>
+        </svg>
+        <input
+          type="search"
+          onChange={(e) => setSearchPerson(e.target.value)}
+          placeholder="Search"
+        />
+      </label>
 
       <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-md">
         <table className="min-w-full bg-white">

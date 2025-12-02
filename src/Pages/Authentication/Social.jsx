@@ -11,16 +11,26 @@ const Social = () => {
   const { googleSignIn } = useAuth();
   const handleGoogleSignIn = () => {
     googleSignIn().then((result) => {
+      if (!result || !result.user) {
+        console.error("Google sign-in failed: No user returned");
+        return;
+      }
+
       const userInfo = {
         email: result.user.email,
-        displayName: result.user.displayName,
+        name: result.user.displayName,
         photoURL: result.user.photoURL,
       };
-      axiosSecure.post("/users", userInfo).then((res) => {
-        console.log("user stored", res.data);
 
-        navigate(from, { replace: true });
-      });
+      axiosSecure
+        .post("/users", userInfo)
+        .then((res) => {
+          console.log("user stored", res.data);
+          navigate(from, { replace: true });
+        })
+        .catch((err) => {
+          console.log("Error storing user:", err.response?.data || err.message);
+        });
     });
   };
   return (
