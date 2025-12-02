@@ -17,7 +17,7 @@ const UserManage = () => {
 
   const handleMakeAdmin = async (id) => {
     const roleInfo = { role: "admin" };
-    await axiosSecure.patch(`/users/${id}`, roleInfo).then((res) => {
+    await axiosSecure.patch(`/users/${id}/role`, roleInfo).then((res) => {
       if (res.data.modifiedCount) {
         Swal.fire({
           position: "top-end",
@@ -33,7 +33,7 @@ const UserManage = () => {
 
   const handleRemoveAdmin = async (id) => {
     const roleInfo = { role: "user" };
-    await axiosSecure.patch(`/users/${id}`, roleInfo).then((res) => {
+    await axiosSecure.patch(`/users/${id}/role`, roleInfo).then((res) => {
       if (res.data.modifiedCount) {
         Swal.fire({
           position: "top-end",

@@ -16,7 +16,7 @@ const Social = () => {
         displayName: result.user.displayName,
         photoURL: result.user.photoURL,
       };
-      axiosSecure.post("http://localhost:3000/users", userInfo).then((res) => {
+      axiosSecure.post("/users", userInfo).then((res) => {
         console.log("user stored", res.data);
 
         navigate(from, { replace: true });

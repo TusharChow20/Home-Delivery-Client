@@ -96,7 +96,11 @@ const router = createBrowserRouter([
       },
       {
         path: "approveRiders",
-        Component: ApproveRiders,
+        element: (
+          <AdminOnlyRoute>
+            <ApproveRiders></ApproveRiders>
+          </AdminOnlyRoute>
+        ),
       },
       {
         path: "userManage",
