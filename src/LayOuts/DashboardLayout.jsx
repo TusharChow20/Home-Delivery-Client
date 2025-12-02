@@ -147,28 +147,29 @@ const DashboardLayout = () => {
 
               {/* List item */}
               <li>
-                <button
+                <NavLink to={'/dashboard/userManage'}
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Settings"
+                  data-tip="User Manage"
                 >
-                  {/* Settings icon */}
+                  {/* User icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
                     fill="none"
                     stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     className="my-1.5 inline-block size-4"
                   >
-                    <path d="M20 7h-9"></path>
-                    <path d="M14 17H5"></path>
-                    <circle cx="17" cy="17" r="3"></circle>
-                    <circle cx="7" cy="7" r="3"></circle>
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M17 11v6" />
+                    <path d="M20 14h-6" />
+                    <path d="M3 21v-2a6 6 0 0 1 12 0v2" />
                   </svg>
-                  <span className="is-drawer-close:hidden">Settings</span>
-                </button>
+
+                  <span className="is-drawer-close:hidden">User Manage</span>
+                </NavLink >
               </li>
             </ul>
           </div>
