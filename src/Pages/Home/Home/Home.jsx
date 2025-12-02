@@ -7,10 +7,14 @@ import Parcel from "../Percel/Parcel";
 import Reviews from "./Reviews";
 import BecomeMerchant from "./BecomeMerchant";
 import FAQ from "./FAQ";
+import useAuth from "../../../Hooks/useAuth";
 
 const reviewData = fetch("/reviews.json").then((res) => res.json());
 
 const Home = () => {
+  const { user } = useAuth();
+  console.log(user);
+
   return (
     <div>
       <h1>THis is Home</h1>

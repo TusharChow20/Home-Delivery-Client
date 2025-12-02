@@ -1,7 +1,11 @@
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
+import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
+  const { role } = useRole();
+  console.log(role);
+
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -121,56 +125,66 @@ const DashboardLayout = () => {
                   </span>
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Approve Riders"
-                  to={"/dashboard/approveRiders"}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                    className="my-1.5 inline-block size-4"
-                  >
-                    <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" />
-                    <path d="M9 12l2 2 4-4" />
-                  </svg>
+              {/* aprove riders  */}
+              {role === "admin" && (
+                <>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Approve Riders"
+                      to={"/dashboard/approveRiders"}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                        strokeWidth="2"
+                        fill="none"
+                        stroke="currentColor"
+                        className="my-1.5 inline-block size-4"
+                      >
+                        <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" />
+                        <path d="M9 12l2 2 4-4" />
+                      </svg>
 
-                  <span className="is-drawer-close:hidden">Approve Riders</span>
-                </NavLink>
-              </li>
+                      <span className="is-drawer-close:hidden">
+                        Approve Riders
+                      </span>
+                    </NavLink>
+                  </li>
 
-              {/* List item */}
-              <li>
-                <NavLink to={'/dashboard/userManage'}
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="User Manage"
-                >
-                  {/* User icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="my-1.5 inline-block size-4"
-                  >
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M17 11v6" />
-                    <path d="M20 14h-6" />
-                    <path d="M3 21v-2a6 6 0 0 1 12 0v2" />
-                  </svg>
+                  {/* List item */}
+                  <li>
+                    <NavLink
+                      to={"/dashboard/userManage"}
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="User Manage"
+                    >
+                      {/* User icon */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="my-1.5 inline-block size-4"
+                      >
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M17 11v6" />
+                        <path d="M20 14h-6" />
+                        <path d="M3 21v-2a6 6 0 0 1 12 0v2" />
+                      </svg>
 
-                  <span className="is-drawer-close:hidden">User Manage</span>
-                </NavLink >
-              </li>
+                      <span className="is-drawer-close:hidden">
+                        User Manage
+                      </span>
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

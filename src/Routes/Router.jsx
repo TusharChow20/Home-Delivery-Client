@@ -16,6 +16,7 @@ import PaymentCancel from "../Pages/Dashboard/PaymantCancle";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 import ApproveRiders from "../Pages/Dashboard/ApproveRiders";
 import UserManage from "../Pages/Dashboard/UserManage";
+import AdminOnlyRoute from "./AdminOnlyRoute";
 
 const router = createBrowserRouter([
   {
@@ -99,7 +100,11 @@ const router = createBrowserRouter([
       },
       {
         path: "userManage",
-        Component: UserManage,
+        element: (
+          <AdminOnlyRoute>
+            <UserManage></UserManage>
+          </AdminOnlyRoute>
+        ),
       },
     ],
   },
