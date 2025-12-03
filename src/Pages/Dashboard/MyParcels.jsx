@@ -137,7 +137,7 @@ const MyParcels = () => {
                         <span
                           className={`inline-block px-3 py-1 rounded-md text-sm font-medium ${delivery.statusColor}`}
                         >
-                          {delivery.status}
+                          {delivery.deliveryStatus}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-700">

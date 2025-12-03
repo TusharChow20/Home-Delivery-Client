@@ -184,6 +184,17 @@ const ApproveRiders = () => {
                       </p>
                     </div>
                   </div>
+                  <div className="flex items-start space-x-3">
+                    <CreditCard className="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" />
+                    <div className="flex-1">
+                      <p className="text-xs text-gray-500 uppercase font-semibold">
+                        Work Status
+                      </p>
+                      <p className="text-sm text-gray-800">
+                        workStatus: {rider.workStatus}
+                      </p>
+                    </div>
+                  </div>
 
                   <div className="flex items-start space-x-3">
                     <Calendar className="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" />

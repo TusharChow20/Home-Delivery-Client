@@ -153,6 +153,32 @@ const DashboardLayout = () => {
                       </span>
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Assign Riders"
+                      to={"/dashboard/assignRiders"}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="my-1.5 inline-block size-4"
+                      >
+                        <circle cx="9" cy="5" r="2" />
+                        <path d="M4 20l5-7 2 3 4-6 5 10" />
+                        <path d="M2 20h20" />
+                      </svg>
+
+                      <span className="is-drawer-close:hidden">
+                        Assign Riders
+                      </span>
+                    </NavLink>
+                  </li>
 
                   {/* List item */}
                   <li>
