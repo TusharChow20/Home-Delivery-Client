@@ -20,6 +20,7 @@ import AdminOnlyRoute from "./AdminOnlyRoute";
 import AssignRiders from "../Pages/Dashboard/AssignRiders";
 import AcceptParcels from "../Pages/Dashboard/AcceeptParcels";
 import RiderOnlyRoute from "./RiderOnlyRotue";
+import DeliveryHistory from "../Pages/Dashboard/DeliveryHistory";
 
 const router = createBrowserRouter([
   {
@@ -106,6 +107,14 @@ const router = createBrowserRouter([
         element: (
           <RiderOnlyRoute>
             <AcceptParcels></AcceptParcels>
+          </RiderOnlyRoute>
+        ),
+      },
+      {
+        path: "deliveryHHistory",
+        element: (
+          <RiderOnlyRoute>
+            <DeliveryHistory></DeliveryHistory>
           </RiderOnlyRoute>
         ),
       },

@@ -18,8 +18,12 @@ const AcceptParcels = () => {
     },
   });
 
-  const handleAccept = async (parcel) => {
-    const parcelInfo = { deliveryStatus: "rider-on-the-way" };
+  const handleAccept = async (parcel, status) => {
+    const parcelInfo = {
+      deliveryStatus: status,
+      riderId: parcel.riderId,
+      trackingId: parcel.trackingId,
+    };
     await axiosSecure
       .patch(`/parcels/${parcel._id}/status`, parcelInfo)
       .then((res) => {
@@ -28,7 +32,7 @@ const AcceptParcels = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Thanks for accepting",
+            title: `Thanks for accepting ${status}`,
             showConfirmButton: false,
             timer: 2000,
           });
@@ -41,6 +45,8 @@ const AcceptParcels = () => {
     await axiosSecure.patch(`/parcels/reject/${id}`);
     refetch();
   };
+
+  // const handleParcelStatus = (parcel, status) => {};
 
   return (
     <div className="p-4">
@@ -66,7 +72,7 @@ const AcceptParcels = () => {
             {parcel.deliveryStatus === "driver-assigned" ? (
               <div className="flex gap-3">
                 <button
-                  onClick={() => handleAccept(parcel)}
+                  onClick={() => handleAccept(parcel, "rider-on-the-way")}
                   className="px-3 py-1.5 rounded bg-green-600 text-white hover:bg-green-700"
                 >
                   Accept
@@ -87,6 +93,20 @@ const AcceptParcels = () => {
                 Accepted
               </button>
             )}
+            <div className="flex flex-col gap-3 md:flex-row">
+              <button
+                onClick={() => handleAccept(parcel, "picked-up")}
+                className="px-3 py-1.5 rounded bg-gray-600 text-white hover:bg-gray-700 pointer "
+              >
+                Pick Up
+              </button>
+              <button
+                onClick={() => handleAccept(parcel, "delivered")}
+                className="px-3 py-1.5 rounded bg-gray-600 text-white hover:bg-gray-700 cursor-pointer"
+              >
+                Delivered
+              </button>
+            </div>
           </div>
         ))}
 

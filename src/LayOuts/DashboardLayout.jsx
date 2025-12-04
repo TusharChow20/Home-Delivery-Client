@@ -240,6 +240,35 @@ const DashboardLayout = () => {
                       </span>
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Delivery History"
+                      to={"/dashboard/deliveryHHistory"}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="my-1.5 inline-block size-4"
+                      >
+                        <rect x="3" y="3" width="12" height="8" rx="2" ry="2" />
+                        <path d="M3 7h12" />
+                        <path d="M6 3v8" />
+
+                        <circle cx="18" cy="17" r="4" />
+                        <path d="M18 15v2l1.5 1.5" />
+                      </svg>
+
+                      <span className="is-drawer-close:hidden">
+                        Delivery History
+                      </span>
+                    </NavLink>
+                  </li>
                 </>
               )}
             </ul>
