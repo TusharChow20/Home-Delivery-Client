@@ -18,6 +18,8 @@ import ApproveRiders from "../Pages/Dashboard/ApproveRiders";
 import UserManage from "../Pages/Dashboard/UserManage";
 import AdminOnlyRoute from "./AdminOnlyRoute";
 import AssignRiders from "../Pages/Dashboard/AssignRiders";
+import AcceptParcels from "../Pages/Dashboard/AcceeptParcels";
+import RiderOnlyRoute from "./RiderOnlyRotue";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +100,14 @@ const router = createBrowserRouter([
       {
         path: "assignRiders",
         Component: AssignRiders,
+      },
+      {
+        path: "acceptParcel",
+        element: (
+          <RiderOnlyRoute>
+            <AcceptParcels></AcceptParcels>
+          </RiderOnlyRoute>
+        ),
       },
       {
         path: "approveRiders",

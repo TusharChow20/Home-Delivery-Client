@@ -4,7 +4,7 @@ import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
   const { role } = useRole();
-  console.log(role);
+  // console.log(role);
 
   return (
     <div>
@@ -126,6 +126,7 @@ const DashboardLayout = () => {
                 </NavLink>
               </li>
               {/* aprove riders  */}
+              {/* admin access only */}
               {role === "admin" && (
                 <>
                   <li>
@@ -206,6 +207,36 @@ const DashboardLayout = () => {
 
                       <span className="is-drawer-close:hidden">
                         User Manage
+                      </span>
+                    </NavLink>
+                  </li>
+                </>
+              )}
+              {/* rider access */}
+              {role === "rider" && (
+                <>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Accept Parcels"
+                      to={"/dashboard/acceptParcel"}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="my-1.5 inline-block size-4"
+                      >
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l5-2.86" />
+                        <polyline points="16 12 18 14 22 10" />
+                      </svg>
+
+                      <span className="is-drawer-close:hidden">
+                        Confirm Parcels
                       </span>
                     </NavLink>
                   </li>
