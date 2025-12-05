@@ -119,6 +119,9 @@ const MyParcels = () => {
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">
                       Action
                     </th>
+                    <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">
+                      Track Product
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -176,6 +179,11 @@ const MyParcels = () => {
                             <BsTrash2 className="w-4 h-4 text-red-500" />
                           </button>
                         </div>
+                      </td>
+                      <td>
+                        <Link to={`/parcelTrack/${delivery.trackingId}`}>
+                          Track Your Product
+                        </Link>
                       </td>
                     </tr>
                   ))}
